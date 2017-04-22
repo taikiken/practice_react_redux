@@ -46,9 +46,9 @@ import runSequence from 'run-sequence';
 import browserSync from 'browser-sync';
 import webpack from 'webpack';
 import del from 'del';
-import pngquant from 'imagemin-pngquant';
-import spritesmith from 'gulp.spritesmith';
-import merge from 'merge-stream';
+// import pngquant from 'imagemin-pngquant';
+// import spritesmith from 'gulp.spritesmith';
+// import merge from 'merge-stream';
 
 import fs from 'fs';
 
@@ -95,9 +95,9 @@ $$.browserSync = browserSync;
 $$.runSequence = runSequence;
 $$.webpack = webpack;
 $$.del = del;
-$$.pngquant = pngquant;
-$$.spritesmith = spritesmith;
-$$.merge = merge;
+// $$.pngquant = pngquant;
+// $$.spritesmith = spritesmith;
+// $$.merge = merge;
 // method
 $$.read = read;
 

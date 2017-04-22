@@ -86,16 +86,19 @@ gulp.task('serve:app', () => {
   gulp.watch([`${dir.app.root}/**/*.html`], $$.reload);
   // scss, css
   gulp.watch([`${dir.app.root}/**/*.{scss,css}`, `${dir.scss}/**/*.scss`], ['css:dev', $$.reload]);
-  // js
+  // js:lint
   gulp.watch([
+    // lint
     `${dir.app.root}/**/*.js`,
     // ignore
-    // `!${dir.app.root}/**/*.{min,app,pack}.js`,
-    // `!${dir.app.root}/**/*-{min,app,pack}.js`,
-    // `!${dir.app.root}/**/*_{min,app,pack}.js`,
-    // `!${dir.app.root}/**/*.{babel,bundle,compile}.js`,
-    // `!${dir.app.root}/**/libs/**/*.js`,
-  ], ['js:lint', $$.reload]);
+    `!${dir.app.root}/**/*.{min,app,pack}.js`,
+    `!${dir.app.root}/**/*-{min,app,pack}.js`,
+    `!${dir.app.root}/**/*_{min,app,pack}.js`,
+    `!${dir.app.root}/**/*.{babel,bundle,compile}.js`,
+    `!${dir.app.root}/**/libs/**/*.js`,
+  ], 'js:lint');
+  // js:reload
+  gulp.watch([`${dir.app.root}/**/*.js`,], $$.reload);
   // image
   gulp.watch([`${dir.app.root}/**/*.{png,jpg,gif,svg}`], $$.reload);
   // font
@@ -106,7 +109,7 @@ gulp.task('serve:app', () => {
 // 開発用更新する
 gulp.task('dev', callback =>
   $$.runSequence(
-    'sprite:build',
+    // 'sprite:build',
     'babels:dev',
     'scripts:dev',
     'css:dev',
@@ -122,8 +125,8 @@ gulp.task('default', callback =>
   $$.runSequence(
     // delete htdocs
     'clean:htdocs',
-    // sprite
-    'sprite:build',
+    // // sprite
+    // 'sprite:build',
     // js
     'vendor:build', // or notuse vendor 'vendor:libs:build',
     'babels:build',
@@ -136,8 +139,8 @@ gulp.task('default', callback =>
     'html:build',
     // font(copy)
     'font:copy',
-    // image(min)
-    'image:build',
+    // // image(min)
+    // 'image:build',
     // clean
     'clean:build',
     callback
