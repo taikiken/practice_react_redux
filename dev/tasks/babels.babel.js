@@ -88,12 +88,13 @@ gulp.task('babels:babel', () => gulp.src(files)
 // webpack [DEV]
 // --------------------------------------
 gulp.task('babels:pack:dev', (callback) => {
-  const config = Object.create(wpk);
+  const config = Object.assign({}, wpk);
   config.plugins = [
     new $$.webpack.optimize.DedupePlugin(),
   ];
-  config.entry = `${config.entry}/babels/01_compile/${fileName.raw}`;
-  config.output.path = dir.app.bundle;
+  config.entry = `${wpk.entry}/babels/01_compile/${fileName.raw}`;
+  // config.output.path = dir.babels.dist;
+  config.output.path = `${wpk.entry}/babels/02_dest`;
   config.output.filename = fileName.bundle;
   // webpack
   return $$.webpack(config, (error, stats) => {
@@ -111,7 +112,8 @@ gulp.task('babels:pack:dev', (callback) => {
 // webpack [BUILD]
 // --------------------------------------
 gulp.task('babels:pack:build', (callback) => {
-  const config = Object.create(wpk);
+  // const config = Object.create(wpk);
+  const config = Object.assign({}, wpk);
   config.plugins = [
     new $$.webpack.optimize.DedupePlugin(),
     new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
