@@ -357,6 +357,15 @@ if (!port) {
 server.indexes = true;
 
 // --------------------------------------
+//  ENV
+// --------------------------------------
+// --env production
+// 標準入力を取得する - production の時に release build
+const env = {
+  mode: process.env.NODE_ENV || 'development',
+};
+
+// --------------------------------------
 //  EXPORT
 // --------------------------------------
 export const module = {
@@ -369,4 +378,5 @@ export const module = {
   patterns,
   compress,
   server,
+  env,
 };
