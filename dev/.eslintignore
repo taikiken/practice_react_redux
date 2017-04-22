@@ -1,9 +1,0 @@
-# bundle
-*.bundle.js
-*.compile.js
-
-# app/**/libs
-./app/assets/js/*
-
-# vendor.js
-vendor.js
