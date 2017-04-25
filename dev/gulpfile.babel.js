@@ -16,15 +16,15 @@ import requireDir from 'require-dir';
 import { module } from './gulp_setting.babel';
 
 const gulp = module.gulp;
-/**
- * gulp-load-plugins instance
- * ```
- * import gulpLoadPlugins from 'gulp-load-plugins';
- * const $ = gulpLoadPlugins();
- * ```
- * @type {*}
- */
-const $ = module.$;
+// /**
+//  * gulp-load-plugins instance
+//  * ```
+//  * import gulpLoadPlugins from 'gulp-load-plugins';
+//  * const $ = gulpLoadPlugins();
+//  * ```
+//  * @type {*}
+//  */
+// const $ = module.$;
 /**
  * @type {{
  *  del: function,
@@ -86,19 +86,19 @@ gulp.task('serve:app', () => {
   gulp.watch([`${dir.app.root}/**/*.html`], $$.reload);
   // scss, css
   gulp.watch([`${dir.app.root}/**/*.{scss,css}`, `${dir.scss}/**/*.scss`], ['css:dev', $$.reload]);
-  // js:lint
-  gulp.watch([
-    // lint
-    `${dir.app.root}/**/*.js`,
-    // ignore
-    `!${dir.app.root}/**/*.{min,app,pack}.js`,
-    `!${dir.app.root}/**/*-{min,app,pack}.js`,
-    `!${dir.app.root}/**/*_{min,app,pack}.js`,
-    `!${dir.app.root}/**/*.{babel,bundle,compile}.js`,
-    `!${dir.app.root}/**/libs/**/*.js`,
-  ], 'js:lint');
+  // // js:lint
+  // gulp.watch([
+  //   // lint
+  //   `${dir.app.root}/**/*.js`,
+  //   // ignore
+  //   `!${dir.app.root}/**/*.{min,app,pack}.js`,
+  //   `!${dir.app.root}/**/*-{min,app,pack}.js`,
+  //   `!${dir.app.root}/**/*_{min,app,pack}.js`,
+  //   `!${dir.app.root}/**/*.{babel,bundle,compile}.js`,
+  //   `!${dir.app.root}/**/libs/**/*.js`,
+  // ], 'js:lint');
   // js:reload
-  gulp.watch([`${dir.app.root}/**/*.js`,], $$.reload);
+  gulp.watch([`${dir.app.root}/**/*.js`], $$.reload);
   // image
   gulp.watch([`${dir.app.root}/**/*.{png,jpg,gif,svg}`], $$.reload);
   // font
