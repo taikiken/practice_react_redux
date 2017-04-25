@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>コンテナ</h1>
+<div id="js-button-container"></div>
 <div id="js-container"></div>
 <script src="/assets/js/app.bundle.js"></script>
 <script>
@@ -38,6 +39,13 @@
     ReactDOM.render(
       React.createElement(Ul, { id: '01', mode: 'test', list, }),
       element
+    );
+
+    // button
+    const Button = PRACTICE_REACT.Button;
+    ReactDOM.render(
+      React.createElement(Button),
+      document.getElementById('js-button-container')
     );
   }(window));
 </script>

@@ -20,11 +20,13 @@ import { default as React } from 'react';
 import { default as ReactDOM } from 'react-dom';
 
 import { default as Ul } from './dom/Ul';
+import { default as Button } from './dom/Button';
 
 const PRACTICE_REACT = {
   React,
   ReactDOM,
   Ul,
+  Button,
 };
 
 self.PRACTICE_REACT = PRACTICE_REACT;
