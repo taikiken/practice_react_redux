@@ -89,9 +89,10 @@ gulp.task('babels:babel', () => gulp.src(files)
 // --------------------------------------
 gulp.task('babels:pack:dev', (callback) => {
   const config = Object.assign({}, wpk);
-  config.plugins = [
-    new $$.webpack.optimize.DedupePlugin(),
-  ];
+  // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
+  // config.plugins = [
+  //   new $$.webpack.optimize.DedupePlugin(),
+  // ];
   config.entry = `${wpk.entry}/babels/01_compile/${fileName.raw}`;
   // config.output.path = dir.babels.dist;
   config.output.path = `${wpk.entry}/babels/02_dest`;
@@ -115,7 +116,8 @@ gulp.task('babels:pack:build', (callback) => {
   // const config = Object.create(wpk);
   const config = Object.assign({}, wpk);
   config.plugins = [
-    new $$.webpack.optimize.DedupePlugin(),
+    // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
+    // new $$.webpack.optimize.DedupePlugin(),
     new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
   ];
   config.entry = `${config.entry}/babels/01_compile/${fileName.raw}`;

@@ -115,7 +115,8 @@ gulp.task('babel:pack:dev', () => {
   const reject = error => console.error(`[ERROR:${directory}]${error}`);
   const resolve = (fileList) => {
     const conf = Object.create(wpk);
-    conf.plugins = [new $$.webpack.optimize.DedupePlugin()];
+    // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
+    // conf.plugins = [new $$.webpack.optimize.DedupePlugin()];
 
     fileList.map((file) => {
       const base = file.split('.').shift();
@@ -145,7 +146,8 @@ gulp.task('babel:pack:build', () => {
   const resolve = (fileList) => {
     const conf = Object.create(wpk);
     conf.plugins = [
-      new $$.webpack.optimize.DedupePlugin(),
+      // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
+      // new $$.webpack.optimize.DedupePlugin(),
       new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
     ];
 
