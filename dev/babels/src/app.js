@@ -16,9 +16,14 @@
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
 /* eslint strict: [0, "global"] */
 
+import { default as React } from 'react';
+import { default as ReactDOM } from 'react-dom';
+
 import { default as Ul } from './dom/Ul';
 
 const PRACTICE_REACT = {
+  React,
+  ReactDOM,
   Ul,
 };
 

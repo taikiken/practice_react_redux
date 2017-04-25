@@ -139,11 +139,13 @@ gulp.task('babels:pack:build', (callback) => {
 gulp.task('babels:copy', () =>
   gulp.src(
     [
-      `${dir.app.root}/**/*.bundle.js`,
+      // `${dir.app.root}/**/*.bundle.js`,
+      `${wpk.entry}/babels/02_dest/**/*.bundle.js`,
     ]
   )
     .pipe($.debug({ title: '[BABELS]' }))
-    .pipe(gulp.dest(dir.dist.root))
+    // .pipe(gulp.dest(dir.dist.root))
+    .pipe(gulp.dest(dir.app.js))
     .pipe($.size({ title: '*** babels:copy ***' }))
 );
 
@@ -155,6 +157,7 @@ gulp.task('babels:dev', callback =>
     'babels:lint',
     'babels:babel',
     'babels:pack:dev',
+    'babels:copy',
     callback,
   )
 );

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>練習ノート</title>
+</head>
+<body>
+<h1>コンテナ</h1>
+<div id="js-container"></div>
+<script src="/assets/js/app.bundle.js"></script>
+<script>
+  (function(window) {
+    'use strict';
+    const document = window.document;
+    const element = document.getElementById('js-container');
+    const PRACTICE_REACT = window.PRACTICE_REACT;
+    const React = PRACTICE_REACT.React;
+    const ReactDOM = PRACTICE_REACT.ReactDOM;
+    const makeList = (index) => {
+      return {
+        id: `id-${index}`,
+        link: `/a/${index}`,
+        message: `index is ${index}`,
+      };
+    };
+    const list = [
+      makeList(0),
+      makeList(1),
+      makeList(2),
+      makeList(3),
+      makeList(4),
+      makeList(5),
+      makeList(6),
+    ];
+    console.log('PRACTICE_REACT', PRACTICE_REACT);
+    const Ul = PRACTICE_REACT.Ul;
+
+    ReactDOM.render(
+      React.createElement(Ul, { id: '01', mode: 'test', list, }),
+      element
+    );
+  }(window));
+</script>
+</body>
+</html>
