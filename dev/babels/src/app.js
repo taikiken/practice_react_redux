@@ -19,8 +19,8 @@
 import { default as React } from 'react';
 import { default as ReactDOM } from 'react-dom';
 
-import { default as Ul } from './dom/Ul';
-import { default as Button } from './dom/Button';
+import { default as Ul } from './components/Ul';
+import { default as Button } from './components/Button';
 
 const PRACTICE_REACT = {
   React,
