@@ -111,8 +111,8 @@ gulp.task('dev', callback =>
   $$.runSequence(
     // 'sprite:build',
     'babels:dev',
-    'scripts:dev',
-    'css:dev',
+    // 'scripts:dev',
+    // 'css:dev',
     callback
   )
 );
@@ -127,14 +127,15 @@ gulp.task('default', callback =>
     'clean:htdocs',
     // // sprite
     // 'sprite:build',
-    // js
-    'vendor:build', // or notuse vendor 'vendor:libs:build',
+    // js ---
+    // or not use vendor 'vendor:libs:build',
+    // 'vendor:build',
     'babels:build',
     'babel:build',
-    'scripts:build',
-    'js:build',
+    // 'scripts:build',
+    // 'js:build',
     // css
-    'css:build',
+    // 'css:build',
     // html
     'html:build',
     // font(copy)

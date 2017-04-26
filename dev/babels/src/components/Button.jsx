@@ -11,9 +11,14 @@
  */
 
 import { default as React } from 'react';
-// import { default as PropTypes } from 'prop-types';
+import { default as PropTypes } from 'prop-types';
 
 export default class Button extends React.Component {
+  static get propTypes() {
+    return {
+      maker: PropTypes.func.isRequired,
+    };
+  }
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
@@ -21,6 +26,7 @@ export default class Button extends React.Component {
   onClick(event) {
     event.preventDefault();
     console.log('Button.onClick', event, this);
+    this.props.maker();
   }
   render() {
     return (

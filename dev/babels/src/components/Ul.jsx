@@ -22,26 +22,25 @@ export default class Ul extends React.Component {
     return {
       id: PropTypes.string.isRequired,
       mode: PropTypes.string.isRequired,
-      list: PropTypes.arrayOf(PropTypes.objectOf({
+      list: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
       })).isRequired,
-      // list: PropTypes.array.isRequired,
     };
   }
   constructor(props) {
     super(props);
-    this.state = {
-      list: props.list,
-    };
+    // react/prefer-stateless-function
+    // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
+    this.displayName = 'Ul';
   }
   render() {
-    console.log('Ul.render', this.state.list);
+    console.log('Ul.render', this.props.list);
     return (
       <ul id={`test-code-${this.props.id}`} className={`mode-${this.props.mode}`}>
         {
-          this.state.list.map((data, index) => {
+          this.props.list.map((data, index) => {
             const key = `component-li-${data.id}`;
             return (
               <Li

@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>練習ノート</title>
+  <style>
+    .list-li {
+      min-height: 30px;
+      padding: 5px;
+      margin-bottom: 5px;
+      background-color: #cccccc;
+    }
+  </style>
 </head>
 <body>
 <h1>コンテナ</h1>
@@ -17,6 +25,16 @@
     const PRACTICE_REACT = window.PRACTICE_REACT;
     const React = PRACTICE_REACT.React;
     const ReactDOM = PRACTICE_REACT.ReactDOM;
+    const Ul = PRACTICE_REACT.Ul;
+
+    const list = [];
+    const makeUl = () => {
+      console.log('list', list);
+      ReactDOM.render(
+        React.createElement(Ul, { id: '01', mode: 'test', list, }),
+        element
+      );
+    };
     const makeList = (index) => {
       return {
         id: `id-${index}`,
@@ -24,27 +42,19 @@
         message: `index is ${index}`,
       };
     };
-    const list = [
-      makeList(0),
-      makeList(1),
-      makeList(2),
-      makeList(3),
-      makeList(4),
-      makeList(5),
-      makeList(6),
-    ];
-    console.log('PRACTICE_REACT', PRACTICE_REACT);
-    const Ul = PRACTICE_REACT.Ul;
+    const maker = (n = 1) => {
+      const counts = new Array(n).fill(0);
 
-    ReactDOM.render(
-      React.createElement(Ul, { id: '01', mode: 'test', list, }),
-      element
-    );
+      console.log('counts', n, counts);
+      counts.map((item) => list.push(makeList(list.length)));
+      makeUl();
+    };
+    maker(6);
 
     // button
     const Button = PRACTICE_REACT.Button;
     ReactDOM.render(
-      React.createElement(Button),
+      React.createElement(Button, { maker }),
       document.getElementById('js-button-container')
     );
   }(window));

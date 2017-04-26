@@ -21,12 +21,23 @@ export default class Li extends React.Component {
       message: PropTypes.string.isRequired,
     };
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    const { index, link, message } = this.props;
+    const willUpdate =
+      nextProps.index !== index ||
+      nextProps.link !== link ||
+      nextProps.message !== message;
+    console.log(`Li.shouldComponentUpdate, ${this.props.index}`, willUpdate, nextProps, nextState);
+    return willUpdate;
+    // return true;
+  }
   componentWillUnmount() {
     console.log(`Li.componentWillUnmount, ${this.props.index}`);
   }
   render() {
+    console.log(`Li.render, ${this.props.index}`);
     return (
-      <li className={`list-${this.props.index}`}>
+      <li className={`list-li list-${this.props.index}`}>
         <a href={this.props.link}>{this.props.message}</a>
       </li>
     );
