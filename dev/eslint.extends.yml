@@ -18,9 +18,9 @@ rules:
   # {
   #   a: 1,
   # }
-#  comma-dangle:
-#    - 2
-#    - always-multiline
+  comma-dangle:
+    - 2
+    - always-multiline
   # http://eslint.org/docs/rules/require-jsdoc
   # JSDoc 必須
   require-jsdoc:
