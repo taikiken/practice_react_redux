@@ -33,7 +33,7 @@ export default class Ul extends React.Component {
         link: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
       })).isRequired
-   * @returns {{id, mode, list}} default props
+   * @returns {{id: string, mode: string, list: Object}} default props
    */
   static get propTypes() {
     return {

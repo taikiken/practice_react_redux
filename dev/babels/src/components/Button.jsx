@@ -19,7 +19,7 @@ import { default as PropTypes } from 'prop-types';
 export default class Button extends React.Component {
   /**
    * - maker - PropTypes.func.isRequired
-   * @returns {{maker}} default props
+   * @returns {{maker: Function}} default props
    */
   static get propTypes() {
     return {

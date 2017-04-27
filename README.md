@@ -20,3 +20,8 @@
 .bashrc or .zshrc
 
     Add export PATH="$PATH:`yarn global bin`"
+    
+
+## Redux width React
+
+[http://redux.js.org/docs/basics/UsageWithReact.html](http://redux.js.org/docs/basics/UsageWithReact.html)

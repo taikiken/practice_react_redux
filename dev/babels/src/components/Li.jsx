@@ -25,7 +25,7 @@ export default class Li extends React.Component {
    * - index - PropTypes.number.isRequired
    * - link - PropTypes.string.isRequired
    * - message - PropTypes.string.isRequired
-   * @returns {{index, link, message}} default props
+   * @returns {{index: number, link: string, message: string}} default props
    */
   static get propTypes() {
     return {
