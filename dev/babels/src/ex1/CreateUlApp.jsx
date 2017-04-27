@@ -22,17 +22,25 @@ import { Provider } from 'react-redux';
 import { default as ListTypes } from './ListTypes';
 
 import { default as ContainerUl } from './ContainerUl';
+import { default as ContainerButton } from './ContainerButton';
 
-const storedList = createStore(ListTypes.update);
-console.log('storedList', storedList);
+const storedUpdate = createStore(ListTypes.update);
+console.log('storedUpdate', storedUpdate);
 
 export default class CreateUlApp {
-  static make(element) {
+  static make(element, buttonElement) {
     ReactDOM.render(
-      <Provider store={storedList}>
+      <Provider store={storedUpdate}>
         <ContainerUl />
       </Provider>,
       element
+    );
+    // button
+    ReactDOM.render(
+      <Provider store={storedUpdate}>
+        <ContainerButton />
+      </Provider>,
+      buttonElement
     );
   }
 }

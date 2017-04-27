@@ -22,46 +22,10 @@
     'use strict';
     const document = window.document;
     const element = document.getElementById('js-container');
-    if (element) {
-      const PRACTICE_REACT = window.PRACTICE_REACT;
-//      const React = PRACTICE_REACT.React;
-//      const ReactDOM = PRACTICE_REACT.ReactDOM;
-//      const Ul = PRACTICE_REACT.Ul;
+    const buttonElement = document.getElementById('js-button-container');
+    const PRACTICE_REACT = window.PRACTICE_REACT;
 
-      const list = [];
-//      const makeUl = () => {
-//        console.log('list', list);
-//        ReactDOM.render(
-//          React.createElement(Ul, { id: '01', mode: 'test', list, }),
-//          element
-//        );
-//      };
-      const makeList = (index) => {
-        return {
-          id: `id-${index}`,
-          link: `/a/${index}`,
-          message: `index is ${index}`,
-        };
-      };
-      const maker = (n = 1) => {
-//        const counts = new Array(n).fill(0);
-//
-//        console.log('counts', n, counts);
-//        counts.map((item) => list.push(makeList(list.length)));
-        PRACTICE_REACT.CreateUlApp.make(element)
-      };
-      maker(6);
-
-//      // button
-//      const buttonElement = document.getElementById('js-button-container');
-//      if (buttonElement) {
-//        const Button = PRACTICE_REACT.Button;
-//        ReactDOM.render(
-//          React.createElement(Button, { maker }),
-//          document.getElementById('js-button-container')
-//        );
-//      }
-    }
+    PRACTICE_REACT.CreateUlApp.make(element, buttonElement);
   }(window));
 </script>
 </body>

@@ -12,7 +12,7 @@
 
 import { default as ListTypes } from './ListTypes';
 
-const { id, mode } = ListTypes.defaultState;
+const { id, mode, list } = ListTypes.defaultState;
 
 const makeList = index => ({
   id: `id-${index}`,
@@ -21,22 +21,21 @@ const makeList = index => ({
 });
 
 export default class ListActions {
-  static update(list = []) {
-    console.log('ListActions.update', list);
+  static update(argList = []) {
+    console.log('ListActions.update argList', argList);
     return {
       type: ListTypes.ADD,
-      list,
+      list: argList,
       id,
       mode,
     };
   }
   static click() {
-    console.log('ListActions.click');
+    list.push(makeList(Date.now()));
+    console.log('ListActions.click', list);
     return {
       type: ListTypes.CLICK,
-      list: [makeList(Date.now())],
-      id,
-      mode,
+      list,
     };
   }
 }

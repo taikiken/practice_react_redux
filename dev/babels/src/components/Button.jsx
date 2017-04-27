@@ -40,7 +40,7 @@ export default class Button extends React.Component {
    */
   onClick(event) {
     event.preventDefault();
-    console.log('Button.onClick', event, this);
+    console.log('Button.onClick', event);
     this.props.maker();
   }
   /**

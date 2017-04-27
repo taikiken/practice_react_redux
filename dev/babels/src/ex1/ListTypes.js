@@ -24,7 +24,6 @@
 //
 // export default types;
 
-
 export default class ListTypes {
   static get ADD() {
     return 'ListTypesAdd';
@@ -39,19 +38,35 @@ export default class ListTypes {
       list: [],
     };
   }
-  static update(state = [], action) {
+  static get defaultButton() {
+    return {
+      list: [],
+      // maker: () => {},
+    };
+  }
+  // static get list() {
+  //   return mutableList;
+  // }
+  // static set list(arr) {
+  //   mutableList = arr;
+  // }
+  static update(state = {}, action) {
     console.log('ListTypes.update', state, action);
     const clone = Object.assign({}, ListTypes.defaultState);
     switch (action.type) {
+      // for ul > li
       case ListTypes.ADD: {
-        console.log(`ListTypes.update ${action.type}, ${ListTypes.ADD}`);
+        console.log(`ListTypes.update ${action.type}`);
         clone.list = action.list;
         return clone;
       }
+      // for button click
       case ListTypes.CLICK: {
-        console.log(`ListTypes.update ${action.type}, ${ListTypes.CLICK}`);
-        clone.list = clone.list.concat(action.list);
-        return clone;
+        const cloneButton = Object.assign({}, ListTypes.defaultButton);
+        // ListTypes.list = ListTypes.list.concat(action.list);
+        cloneButton.list = action.list.concat(cloneButton.list);
+        console.log(`ListTypes.click ${action.type}`, action, cloneButton);
+        return cloneButton;
       }
       default: {
         console.log(`ListTypes.update default ${action.type}`, clone);
