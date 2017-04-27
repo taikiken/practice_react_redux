@@ -28,8 +28,12 @@ import { default as ListActions } from './ListActions';
 //   dispatch(ListActions.click());
 // };
 
+/**
+ * redux dispatch handler
+ * @param {*} dispatch redux.dispatch
+ * @returns {XML} {@link Button} を返します
+ */
 const ContainerButtonSetup = ({ dispatch }) => <Button
-  // maker={() => onClick(dispatch)}
   maker={() => dispatch(ListActions.click())}
 />;
 
