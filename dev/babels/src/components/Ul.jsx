@@ -40,9 +40,9 @@ export default class Ul extends React.Component {
       id: PropTypes.string.isRequired,
       mode: PropTypes.string.isRequired,
       list: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        message: PropTypes.string.isRequired,
+        id: PropTypes.string,
+        link: PropTypes.string,
+        message: PropTypes.string,
       })).isRequired,
     };
   }
@@ -52,6 +52,7 @@ export default class Ul extends React.Component {
    */
   constructor(props) {
     super(props);
+    console.log('Ul.constructor props', props);
     // react/prefer-stateless-function
     // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
     this.displayName = 'Ul';

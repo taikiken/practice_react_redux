@@ -22,11 +22,15 @@ import { default as ReactDOM } from 'react-dom';
 import { default as Ul } from './components/Ul';
 import { default as Button } from './components/Button';
 
+// ex1
+import { default as CreateUlApp } from './ex1/CreateUlApp';
+
 const PRACTICE_REACT = {
   React,
   ReactDOM,
   Ul,
   Button,
+  CreateUlApp,
 };
 
 self.PRACTICE_REACT = PRACTICE_REACT;

@@ -13,9 +13,6 @@
   </style>
 </head>
 <body>
-<ul>
-  <li><a href="001.html">redux 001</a></li>
-</ul>
 <h1>コンテナ</h1>
 <div id="js-button-container"></div>
 <div id="js-container"></div>
@@ -27,18 +24,18 @@
     const element = document.getElementById('js-container');
     if (element) {
       const PRACTICE_REACT = window.PRACTICE_REACT;
-      const React = PRACTICE_REACT.React;
-      const ReactDOM = PRACTICE_REACT.ReactDOM;
-      const Ul = PRACTICE_REACT.Ul;
+//      const React = PRACTICE_REACT.React;
+//      const ReactDOM = PRACTICE_REACT.ReactDOM;
+//      const Ul = PRACTICE_REACT.Ul;
 
       const list = [];
-      const makeUl = () => {
-        console.log('list', list);
-        ReactDOM.render(
-          React.createElement(Ul, { id: '01', mode: 'test', list, }),
-          element
-        );
-      };
+//      const makeUl = () => {
+//        console.log('list', list);
+//        ReactDOM.render(
+//          React.createElement(Ul, { id: '01', mode: 'test', list, }),
+//          element
+//        );
+//      };
       const makeList = (index) => {
         return {
           id: `id-${index}`,
@@ -47,23 +44,23 @@
         };
       };
       const maker = (n = 1) => {
-        const counts = new Array(n).fill(0);
-
-        console.log('counts', n, counts);
-        counts.map((item) => list.push(makeList(list.length)));
-        makeUl();
+//        const counts = new Array(n).fill(0);
+//
+//        console.log('counts', n, counts);
+//        counts.map((item) => list.push(makeList(list.length)));
+        PRACTICE_REACT.CreateUlApp.make(element)
       };
       maker(6);
 
-      // button
-      const buttonElement = document.getElementById('js-button-container');
-      if (buttonElement) {
-        const Button = PRACTICE_REACT.Button;
-        ReactDOM.render(
-          React.createElement(Button, { maker }),
-          document.getElementById('js-button-container')
-        );
-      }
+//      // button
+//      const buttonElement = document.getElementById('js-button-container');
+//      if (buttonElement) {
+//        const Button = PRACTICE_REACT.Button;
+//        ReactDOM.render(
+//          React.createElement(Button, { maker }),
+//          document.getElementById('js-button-container')
+//        );
+//      }
     }
   }(window));
 </script>
