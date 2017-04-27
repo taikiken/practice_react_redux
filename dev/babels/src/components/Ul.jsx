@@ -17,7 +17,24 @@ import { default as PropTypes } from 'prop-types';
 
 import { default as Li } from './Li';
 
+/**
+ * ul component
+ * ```
+ * <Ul />
+ *   <{@link Li} />
+ * ```
+ */
 export default class Ul extends React.Component {
+  /**
+   * - id - PropTypes.string.isRequired
+   * - mode - PropTypes.string.isRequired
+   * - list - PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired,
+      })).isRequired
+   * @returns {{id, mode, list}} default props
+   */
   static get propTypes() {
     return {
       id: PropTypes.string.isRequired,
@@ -29,12 +46,21 @@ export default class Ul extends React.Component {
       })).isRequired,
     };
   }
+  /**
+   * display name set to 'Ul'
+   * @param {Object} props {id, mode, list}
+   */
   constructor(props) {
     super(props);
     // react/prefer-stateless-function
     // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
     this.displayName = 'Ul';
   }
+
+  /**
+   * ul.mode-${this.props.mode} を作成します
+   * @returns {XML} ul component を作成します
+   */
   render() {
     console.log('Ul.render', this.props.list);
     return (
