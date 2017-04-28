@@ -10,7 +10,7 @@
  *
  */
 
-export default class ListTypesAsync {
+export default class ListReducersAsync {
   /**
    * button click -> ajax request
    * @event CLICK
@@ -41,5 +41,19 @@ export default class ListTypesAsync {
       mode: 'ex2',
       list: [],
     };
+  }
+  update(state = {}, action) {
+    const clone = Object.assign({}, ListTypes.defaultState);
+    switch (action.type) {
+      case ListReducersAsync.CLICK: {
+        console.log(`ListReducersAsync.update ${action.type}`, state, action, clone);
+        // const cloneButton = clone;
+        // clone.list = action.list.concat(clone.list);
+        return clone;
+      }
+      default: {
+        return clone;
+      }
+    }
   }
 }
