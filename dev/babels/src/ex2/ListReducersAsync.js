@@ -43,7 +43,7 @@ export default class ListReducersAsync {
     };
   }
   update(state = {}, action) {
-    const clone = Object.assign({}, ListTypes.defaultState);
+    const clone = Object.assign({}, ListReducersAsync.defaultState);
     switch (action.type) {
       case ListReducersAsync.CLICK: {
         console.log(`ListReducersAsync.update ${action.type}`, state, action, clone);
