@@ -15,10 +15,9 @@ import { default as PropTypes } from 'prop-types';
 
 /**
  * li component
- * ```
- * <{@link Ul} />
- *  <Li />
- * ```
+ * - {@link Ul}
+ *   - Li
+ *     - a
  */
 export default class Li extends React.Component {
   /**
@@ -35,11 +34,14 @@ export default class Li extends React.Component {
     };
   }
   /**
-   * delegate - render するかを判断します
+   * delegate - render するかを判断します, 下記 3 properties のいずれかが違っていたら render します
+   * - index
+   * - link
+   * - message
    * @override
    * @param {?Object} nextProps 更新される props
    * @param {?Object} nextState 更新される state
-   * @returns {boolean} true: will render
+   * @returns {boolean} true: will be render
    */
   shouldComponentUpdate(nextProps, nextState) {
     const { index, link, message } = this.props;
@@ -55,9 +57,11 @@ export default class Li extends React.Component {
     console.log(`Li.componentWillUnmount, ${this.props.index}`);
   }
   /**
+   * li.list-li を作成します
    * ```
    * <li class="list-li">
-   *   <a>
+   *   <a />
+   * </li>
    * ```
    * @returns {XML} li.list-li を返します
    */

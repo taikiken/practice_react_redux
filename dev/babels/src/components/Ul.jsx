@@ -19,20 +19,18 @@ import { default as Li } from './Li';
 
 /**
  * ul component
- * ```
- * <Ul />
- *   <{@link Li} />
- * ```
+ * - Ul
+ *   - {@link Li}
  */
 export default class Ul extends React.Component {
   /**
    * - id - PropTypes.string.isRequired
    * - mode - PropTypes.string.isRequired
    * - list - PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        message: PropTypes.string.isRequired,
-      })).isRequired
+   *      id: PropTypes.string.isRequired,
+   *      link: PropTypes.string.isRequired,
+   *      message: PropTypes.string.isRequired,
+   *    })).isRequired
    * @returns {{id: string, mode: string, list: Object}} default props
    */
   static get propTypes() {
@@ -57,17 +55,22 @@ export default class Ul extends React.Component {
     // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
     this.displayName = 'Ul';
   }
-
   /**
-   * ul.mode-${this.props.mode} を作成します
-   * @returns {XML} ul component を作成します
+   * ul.mode-${this.props.mode} を作成します返します,
+   * props.list length 0 は `null` を返します
+   * @returns {?XML} ul component を作成します
    */
   render() {
-    console.log('Ul.render', this.props.list);
+    console.log('Ul.render', this.props.list, this.state);
+    const { list } = this.props;
+    // データがないときは `null` を返します
+    if (list.length === 0) {
+      return null;
+    }
     return (
       <ul id={`test-code-${this.props.id}`} className={`mode-${this.props.mode}`}>
         {
-          this.props.list.map((data, index) => {
+          list.map((data, index) => {
             const key = `component-li-${data.id}`;
             return (
               <Li

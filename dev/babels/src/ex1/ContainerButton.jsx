@@ -17,30 +17,37 @@ import { default as PropTypes } from 'prop-types';
 // redux
 import { connect } from 'react-redux';
 
+// component
 import { default as Button } from '../components/Button';
 
-// import { default as ListTypes } from './ListTypes';
+//
 import { default as ListActions } from './ListActions';
-
-// const { id, mode } = ListTypes.defaultState;
-
-// const onClick = (dispatch) => {
-//   dispatch(ListActions.click());
-// };
 
 /**
  * redux dispatch handler
  * @param {*} dispatch redux.dispatch
  * @returns {XML} {@link Button} を返します
  */
-const ContainerButtonSetup = ({ dispatch }) => <Button
+const containerButtonDispatch = ({ dispatch }) => <Button
   maker={() => dispatch(ListActions.click())}
 />;
 
-ContainerButtonSetup.propTypes = {
+containerButtonDispatch.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
-
-const ContainerButton = connect()(ContainerButtonSetup);
+/**
+ * {@link Button}
+ * redux.connect - {@link containerButtonDispatch}
+ * ```
+ * containerButtonDispatch = ({ dispatch }) =>
+ *  <Button
+ *    maker={() => dispatch(ListActions.click())}
+ *  />
+ * // ----
+ * connect()(containerButtonDispatch)
+ * ```
+ * @type {Connect|Function}
+ */
+const ContainerButton = connect()(containerButtonDispatch);
 
 export default ContainerButton;

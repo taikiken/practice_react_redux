@@ -10,27 +10,29 @@
  *
  */
 
-// const types = (state = [], action) => {
-//   console.log('types', state, action);
-//   switch (action.type) {
-//     case 'ADD_LIST': {
-//       return action.list;
-//     }
-//     default: {
-//       return state;
-//     }
-//   }
-// };
-//
-// export default types;
-
+/**
+ * redux reducer
+ * - type set
+ *   - ADD
+ *   - CLICK
+ * - createStore(ListTypes.update)
+ */
 export default class ListTypes {
-  static get ADD() {
-    return 'ListTypesAdd';
-  }
+  /**
+   * button click -> ADD
+   * @event CLICK
+   * @returns {string} ListTypesClick
+   */
   static get CLICK() {
     return 'ListTypesClick';
   }
+  /**
+   * Ul default state
+   * - id - `redux-ul`
+   * - mode - `ex1`
+   * - list - []
+   * @returns {{id: string, mode: string, list: Array}} Ul default state を返します
+   */
   static get defaultState() {
     return {
       id: 'redux-ul',
@@ -38,38 +40,27 @@ export default class ListTypes {
       list: [],
     };
   }
-  static get defaultButton() {
-    return {
-      list: [],
-      // maker: () => {},
-    };
-  }
-  // static get list() {
-  //   return mutableList;
-  // }
-  // static set list(arr) {
-  //   mutableList = arr;
-  // }
+  /**
+   * redux.creatStore 対象 method
+   * - action.type: {@link ListTypes.CLICK} - list と action.list を結合します
+   * - action.type: ListTypes.CLICK 以外 - {@link ListTypes.defaultState} を返します
+   * @param {Object} state 状態
+   * @param {Object} action update 状態
+   * @returns {*} 更新後状態
+   */
   static update(state = {}, action) {
-    console.log('ListTypes.update', state, action);
     const clone = Object.assign({}, ListTypes.defaultState);
     switch (action.type) {
-      // for ul > li
-      case ListTypes.ADD: {
-        console.log(`ListTypes.update ${action.type}`);
-        clone.list = action.list;
-        return clone;
-      }
       // for button click
       case ListTypes.CLICK: {
-        const cloneButton = Object.assign({}, ListTypes.defaultButton);
-        // ListTypes.list = ListTypes.list.concat(action.list);
-        cloneButton.list = action.list.concat(cloneButton.list);
-        console.log(`ListTypes.click ${action.type}`, action, cloneButton);
-        return cloneButton;
+        console.log(`ListTypes.update ${action.type}`, state, action, clone);
+        // const cloneButton = clone;
+        clone.list = action.list.concat(clone.list);
+        return clone;
       }
+      // for @@redux/INIT
       default: {
-        console.log(`ListTypes.update default ${action.type}`, clone);
+        console.log(`ListTypes.update default ${action.type}`, state, action, clone);
         return clone;
       }
     }

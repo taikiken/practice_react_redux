@@ -25,9 +25,29 @@ import { default as ContainerUl } from './ContainerUl';
 import { default as ContainerButton } from './ContainerButton';
 
 const storedUpdate = createStore(ListTypes.update);
-console.log('storedUpdate', storedUpdate);
+// console.log('storedUpdate', storedUpdate);
 
+/**
+ * {@link ContainerUl}, {@link ContainerButton} を作成します
+ * {@link ListTypes.update} を redux.createStore します
+ * ```
+ * const storedUpdate = createStore(ListTypes.update);
+ * ```
+ * ** ReactDOM.render **
+ * - Provider store={storedUpdate}
+ *   - {@link ContainerUl}
+ *     - redux.connect()({@link Ul})
+ *   - {@link ContainerButton}
+ *    - redux.connect()({@link ContainerButton}.containerButtonDispatch)
+ *      - {@link Button}
+ *
+ */
 export default class CreateUlApp {
+  /**
+   * parent element を受取 {@link ContainerUl}, {@link ContainerButton} を作成します
+   * @param {Element} element div#js-container
+   * @param {Element} buttonElement div#js-button-container
+   */
   static make(element, buttonElement) {
     ReactDOM.render(
       <Provider store={storedUpdate}>

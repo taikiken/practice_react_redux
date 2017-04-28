@@ -12,27 +12,36 @@
 
 import { default as ListTypes } from './ListTypes';
 
-const { id, mode, list } = ListTypes.defaultState;
+/**
+ * li - 更新リスト {@link ListTypes.defaultState}
+ * @type {Array<Object>}
+ */
+const { list } = ListTypes.defaultState;
 
-const makeList = index => ({
-  id: `id-${index}`,
-  link: `/a/${index}`,
-  message: `index is ${index}`,
-});
-
+/**
+ * redux.connect 対象 method 管理します
+ */
 export default class ListActions {
-  static update(argList = []) {
-    console.log('ListActions.update argList', argList);
+  /**
+   * button click で実行し Object を作成します
+   * @param {*} index id に加える index - unique key を保証すること！
+   * @returns {{id: string, link: string, message: string}} 作成 object を返します
+   */
+  static makeList(index) {
     return {
-      type: ListTypes.ADD,
-      list: argList,
-      id,
-      mode,
+      id: `id-${index}`,
+      link: `/a/${index}`,
+      message: `index is ${index}`,
     };
   }
+  /**
+   * {@link ContainerButton}.containerButtonDispatch
+   * @returns {{type: string, list: Array}} action
+   */
   static click() {
-    list.push(makeList(Date.now()));
+    // const { list } = ListTypes.defaultState;
     console.log('ListActions.click', list);
+    list.push(ListActions.makeList(Date.now()));
     return {
       type: ListTypes.CLICK,
       list,

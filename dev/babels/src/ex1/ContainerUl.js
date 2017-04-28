@@ -13,11 +13,13 @@
 // redux
 import { connect } from 'react-redux';
 
+// ------
 import { default as Ul } from '../components/Ul';
 
-import { default as ListTypes } from './ListTypes';
+// import { default as ListTypes } from './ListTypes';
 
-const { id, mode } = ListTypes.defaultState;
+// ------
+// const { id, mode } = ListTypes.defaultState;
 
 /**
  * state -> prop convert
@@ -35,12 +37,23 @@ const { id, mode } = ListTypes.defaultState;
 const mapStateToProps = (state) => {
   console.log('mapStateToProps state', state);
   return {
-    id,
-    mode,
+    id: state.id,
+    mode: state.mode,
     list: state.list,
   };
 };
-
+/**
+ * ```
+ * mapStateToProps = (state) => ({
+ *  id: state.id,
+ *  mode: state.mode,
+ *  list: state.list,
+ * })
+ * // ---
+ * connect(mapStateToProps)(Ul)
+ * ```
+ * @type {Connect|Function}
+ */
 const ContainerUl = connect(mapStateToProps)(Ul);
 
 export default ContainerUl;
