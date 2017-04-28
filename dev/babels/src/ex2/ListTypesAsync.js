@@ -12,7 +12,7 @@
 
 export default class ListTypesAsync {
   /**
-   * button click -> ADD
+   * button click -> ajax request
    * @event CLICK
    * @returns {string} ListTypesClick
    */

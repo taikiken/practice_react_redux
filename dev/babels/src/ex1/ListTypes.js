@@ -18,7 +18,7 @@
  */
 export default class ListTypes {
   /**
-   * button click -> ADD
+   * button click
    * @event CLICK
    * @returns {string} ListTypesClick
    */
