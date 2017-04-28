@@ -13,7 +13,6 @@
 /**
  * redux reducer
  * - type set
- *   - ADD
  *   - CLICK
  * - createStore(ListTypes.update)
  */
