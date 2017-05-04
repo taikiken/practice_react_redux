@@ -46,7 +46,7 @@ export default class ListReducersAsync {
     const clone = Object.assign({}, ListReducersAsync.defaultState);
     switch (action.type) {
       case ListReducersAsync.CLICK: {
-        console.log(`ListReducersAsync.update ${action.type}`, state, action, clone);
+        console.log(`ListReducersAsync.update ${action.type}`, state, action, clone, this);
         // const cloneButton = clone;
         // clone.list = action.list.concat(clone.list);
         return clone;

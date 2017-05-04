@@ -19,10 +19,10 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 // types
-import { default as ListTypes } from './ListTypes';
+import { default as ListTypes } from '../ex1/ListTypes';
 
-import { default as ContainerUl } from './ContainerUl';
-import { default as ContainerButton } from './ContainerButton';
+import { default as ContainerUl } from '../ex1/ContainerUl';
+import { default as ContainerButton } from '../ex1/ContainerButton';
 
 const storedUpdate = createStore(ListTypes.update);
 

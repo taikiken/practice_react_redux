@@ -16,6 +16,10 @@
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
 /* eslint strict: [0, "global"] */
 
+import 'whatwg-fetch';
+import Promise from 'promise-polyfill';
+
+// react
 import { default as React } from 'react';
 import { default as ReactDOM } from 'react-dom';
 
@@ -24,6 +28,11 @@ import { default as Button } from './components/Button';
 
 // ex1
 import { default as CreateUlApp } from './ex1/CreateUlApp';
+
+// To add to window
+if (!window.Promise) {
+  window.Promise = Promise;
+}
 
 const PRACTICE_REACT = {
   React,
