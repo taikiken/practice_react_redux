@@ -28,9 +28,10 @@ import { default as ListActions } from './ListActions';
  * @param {*} dispatch redux.dispatch
  * @returns {XML} {@link Button} を返します
  */
-const containerButtonDispatch = ({ dispatch }) => <Button
-  maker={() => dispatch(ListActions.click())}
-/>;
+const containerButtonDispatch = ({ dispatch }) =>
+  <Button
+    maker={() => dispatch(ListActions.click())}
+  />;
 
 containerButtonDispatch.propTypes = {
   dispatch: PropTypes.func.isRequired,

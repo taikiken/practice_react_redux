@@ -15,8 +15,11 @@ import { default as React } from 'react';
 import { default as ReactDOM } from 'react-dom';
 
 // redux
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+
+// redux-thunk
+import thunk from 'redux-thunk';
 
 // types
 import { default as ListTypes } from './ListTypes';
@@ -24,7 +27,10 @@ import { default as ListTypes } from './ListTypes';
 import { default as ContainerUl } from './ContainerUl';
 import { default as ContainerButton } from './ContainerButton';
 
-const storedUpdate = createStore(ListTypes.update);
+const storedUpdate = createStore(
+  ListTypes.update,
+  applyMiddleware(thunk)
+);
 // console.log('storedUpdate', storedUpdate);
 
 /**

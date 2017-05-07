@@ -51,6 +51,9 @@ export default class Ul extends React.Component {
   constructor(props) {
     super(props);
     console.log('Ul.constructor props', props);
+    if (!props.list) {
+      throw new Error(`Ul.props.list not found ${props.list}`);
+    }
     // react/prefer-stateless-function
     // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
     this.displayName = 'Ul';
@@ -61,11 +64,11 @@ export default class Ul extends React.Component {
    * @returns {?XML} ul component を作成します
    */
   render() {
-    console.log('Ul.render', this.props.list, this.state);
     const { list } = this.props;
+    console.log('Ul.render', list, list.length, this.props, this.state);
     // データがないときは `null` を返します
     if (list.length === 0) {
-      return null;
+      return <span className="empty-sapn">&nbsp;</span>;
     }
     return (
       <ul id={`test-code-${this.props.id}`} className={`mode-${this.props.mode}`}>

@@ -19,25 +19,26 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 // types
-import { default as ListTypes } from '../ex1/ListTypes';
+import { default as ListReducersAsync } from './ListReducersAsync';
 
-import { default as ContainerUl } from '../ex1/ContainerUl';
-import { default as ContainerButton } from '../ex1/ContainerButton';
+import { default as ContainerUlAsync } from './ContainerUlAsync';
+import { default as ContainerButtonAsync } from './ContainerButtonAsync';
 
-const storedUpdate = createStore(ListTypes.update);
+const reducer = new ListReducersAsync();
+const storedUpdate = createStore(reducer.update);
 
-export default class CreatUlAppAsync {
+export default class CreateUlAppAsync {
   static make(element, buttonElement) {
     ReactDOM.render(
       <Provider store={storedUpdate}>
-        <ContainerUl />
+        <ContainerUlAsync />
       </Provider>,
       element
     );
     // button
     ReactDOM.render(
       <Provider store={storedUpdate}>
-        <ContainerButton />
+        <ContainerButtonAsync.ContainerButton />
       </Provider>,
       buttonElement
     );

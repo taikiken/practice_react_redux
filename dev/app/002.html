@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>練習ノート</title>
+  <style>
+    .list-li {
+      min-height: 30px;
+      padding: 5px;
+      margin-bottom: 5px;
+      background-color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+<h1>コンテナ</h1>
+<div id="js-button-container"></div>
+<div id="js-container"></div>
+<script src="/assets/js/app.bundle.js"></script>
+<script>
+  (function(window) {
+    'use strict';
+    const document = window.document;
+    const element = document.getElementById('js-container');
+    const buttonElement = document.getElementById('js-button-container');
+    const PRACTICE_REACT = window.PRACTICE_REACT;
+
+    PRACTICE_REACT.CreateUlAppAsync.make(element, buttonElement);
+  }(window));
+</script>
+</body>
+</html>
