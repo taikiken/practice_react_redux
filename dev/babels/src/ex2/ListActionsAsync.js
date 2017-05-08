@@ -69,7 +69,7 @@ export default class ListActionsAsync {
   /**
    * {@link Button} click 後呼び出され {@link NetRequest}.start します
    * @param {function} dispatch property へ保存します
-   * @returns {{type: string}} {@link ListReducersAsync.CLICK}
+   * @returns {{type: (string|Event)}} {@link ListReducersAsync.CLICK}
    */
   click(dispatch) {
     this.dispatch = dispatch;

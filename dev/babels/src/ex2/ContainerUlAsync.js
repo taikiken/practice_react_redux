@@ -20,7 +20,7 @@ import { default as Ul } from '../components/Ul';
 /**
  * state を redux 経由し props 変換します
  * @param {*} state 更新される state
- * @returns {*} 更新後の state を返します
+ * @returns {*} 引数 state を返します
  */
 const mapStateToProps = (state) => {
   console.log('mapStateToProps state', state);
