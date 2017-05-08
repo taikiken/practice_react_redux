@@ -17,16 +17,23 @@ import { connect } from 'react-redux';
 // ------
 import { default as Ul } from '../components/Ul';
 
+/**
+ * state を redux 経由し props 変換します
+ * @param {*} state 更新される state
+ * @returns {*} 更新後の state を返します
+ */
 const mapStateToProps = (state) => {
   console.log('mapStateToProps state', state);
-  // return {
-  //   id: state.id,list,
-  //   mode: state.mode,
-  //   list: state.data,
-  // };
   return state;
 };
 
+/**
+ * redux connect を {@link mapStateToProps} と {@link Ul} します
+ */
 const ContainerUlAsync = connect(mapStateToProps)(Ul);
 
+/**
+ * redux connect を {@link mapStateToProps} と {@link Ul} した object
+ * @type {*}
+ */
 export default ContainerUlAsync;

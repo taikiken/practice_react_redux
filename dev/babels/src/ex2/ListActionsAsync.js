@@ -16,7 +16,15 @@ import { default as NetRequest } from './NetRequest';
 // reducer
 import { default as ListReducersAsync } from './ListReducersAsync';
 
+/**
+ * redux action 定義します
+ */
 export default class ListActionsAsync {
+  /**
+   * Ajax success {@link ListReducersAsync.COMPLETE} を定義します
+   * @param {Object} data - JSON
+   * @returns {{type: string, data: object}} ListReducersAsync.COMPLETE state
+   */
   static done(data) {
     console.log('ListActionsAsync.done', data);
     return {
@@ -24,6 +32,11 @@ export default class ListActionsAsync {
       data,
     };
   }
+  /**
+   * Ajax error {@link ListReducersAsync.ERROR} を定義します
+   * @param {Error} error Ajax error
+   * @returns {{type: (number|Event|string), error: *}} ListReducersAsync.ERROR state
+   */
   static fail(error) {
     console.log('ListActionsAsync.fail', error);
     return {
@@ -31,13 +44,33 @@ export default class ListActionsAsync {
       error,
     };
   }
-  // constructor(resolve, reject, path = '/api/json/test.json') {
-  //   this.request = new NetRequest(path, resolve, reject);
-  // }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * JSON path から {@link NetRequest} instance を作成します
+   * @param {string} [path=/api/json/test.json] JSON path
+   */
   constructor(path = '/api/json/test.json') {
+    /**
+     * NetRequest instance
+     * @type {NetRequest}
+     */
     this.request = new NetRequest(path, this.done.bind(this), this.fail.bind(this));
+    /**
+     * react dispatch
+     * @type {?function}
+     */
     this.dispatch = null;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * {@link Button} click 後呼び出され {@link NetRequest}.start します
+   * @param {function} dispatch property へ保存します
+   * @returns {{type: string}} {@link ListReducersAsync.CLICK}
+   */
   click(dispatch) {
     this.dispatch = dispatch;
     this.request.start();
@@ -45,9 +78,17 @@ export default class ListActionsAsync {
       type: ListReducersAsync.CLICK,
     };
   }
+  /**
+   * Ajax success callback
+   * @param {Object} data JSON data
+   */
   done(data) {
     this.dispatch(ListActionsAsync.done(data));
   }
+  /**
+   * Ajax error callback
+   * @param {Error} error Ajax error
+   */
   fail(error) {
     this.dispatch(ListActionsAsync.fail(error));
   }

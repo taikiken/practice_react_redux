@@ -13,17 +13,45 @@
 
 import { default as Ajax } from '../net/Ajax';
 
+/**
+ * {@link Ajax} を使用し JSON data を取得します
+ */
 export default class NetRequest {
+  /**
+   * {@link Ajax} instance を作成します
+   * @param {string} path request path
+   * @param {function} [resolve=this.done] success callback
+   * @param {function} [reject=this.fail] error callback
+   */
   constructor(path, resolve = this.done.bind(this), reject = this.fail.bind(this)) {
+    /**
+     * request path
+     * @type {string}
+     */
     this.path = path;
+    /**
+     * ajax instance
+     * @type {Ajax}
+     */
     this.ajax = new Ajax(resolve, reject);
   }
+  /**
+   * Ajax request 開始
+   */
   start() {
     this.ajax.start(this.path);
   }
+  /**
+   * Ajax success callback
+   * @param {Object} data JSON data
+   */
   done(data) {
     console.warn('NetRequest.done', data, this);
   }
+  /**
+   * Ajax error callback
+   * @param {Error} error ajax error
+   */
   fail(error) {
     console.warn('NetRequest.fail', error, this);
   }

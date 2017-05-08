@@ -24,10 +24,30 @@ import { default as ListReducersAsync } from './ListReducersAsync';
 import { default as ContainerUlAsync } from './ContainerUlAsync';
 import { default as ContainerButtonAsync } from './ContainerButtonAsync';
 
+/**
+ * ListReducersAsync instance
+ * @type {ListReducersAsync}
+ */
 const reducer = new ListReducersAsync();
+/**
+ * redux createStore で {@link ListReducersAsync.update} します
+ * @type {Store<S>}
+ */
 const storedUpdate = createStore(reducer.update);
 
+/**
+ * {@link ContainerUlAsync}, {@link ContainerButtonAsync}.ContainerButton を出力します
+ * - Provider
+ *  - ContainerUlAsync
+ * - Provider
+ *  - ContainerButtonAsync.ContainerButton
+ */
 export default class CreateUlAppAsync {
+  /**
+   * {@link ContainerUlAsync}, {@link ContainerButtonAsync}.ContainerButton を作成します
+   * @param {Element} element {@link Ul} parent node
+   * @param {Element} buttonElement {@link Button} parent node
+   */
   static make(element, buttonElement) {
     ReactDOM.render(
       <Provider store={storedUpdate}>

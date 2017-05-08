@@ -10,6 +10,15 @@
  *
  */
 
+/**
+ * reducer を定義します
+ * - type を設定
+ *  - CLICK
+ *  - COMPLETE
+ *  - ERROR
+ *
+ * type 毎の戻り値を設定します
+ */
 export default class ListReducersAsync {
   /**
    * button click -> ajax request
@@ -19,32 +28,61 @@ export default class ListReducersAsync {
   static get CLICK() {
     return 'ListTypesAsyncClick';
   }
-  static get START() {
-    return 'ListTypesAsyncStart';
-  }
+  // static get START() {
+  //   return 'ListTypesAsyncStart';
+  // }
+  /**
+   * Ajax success
+   * @event COMPLETE
+   * @returns {string} ListTypesAsyncComplete
+   */
   static get COMPLETE() {
     return 'ListTypesAsyncComplete';
   }
+  /**
+   * Ajax error
+   * @event ERROR
+   * @returns {string} ListTypesAsyncError
+   */
   static get ERROR() {
     return 'ListTypesAsyncError';
   }
-  // /**
-  //  * Ul default state
-  //  * - id - `redux-ul`
-  //  * - mode - `ex1`
-  //  * - list - []
-  //  * @returns {{
-  //  *  request: [*],
-  //  *  loading: string,
-  //  *  error: string,
-  //  *  type: string,
-  //  *  id: string,
-  //  *  mode: string
-  //  * }}
-  //  */
-  static get defaultState() {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * list 初期化し `update` bind します
+   */
+  constructor() {
+    /**
+     * JSON 配列を加算保持します
+     * @type {Array}
+     */
+    this.list = [];
+    /**
+     * bound {@link this.update}
+     * @type {function}
+     */
+    this.update = this.update.bind(this);
+  }
+  // ----------------------------------------
+  // GETTER
+  // ----------------------------------------
+  /**
+   * state default 値
+   * @returns {{
+   *  list: Array,
+   *  loading: string,
+   *  error: string,
+   *  type: string,
+   *  id: string,
+   *  mode: string
+   * }}
+   * default value
+   */
+  get defaultState() {
     return {
-      list: [],
+      list: this.list,
       loading: 'loading',
       error: '',
       type: '',
@@ -52,13 +90,18 @@ export default class ListReducersAsync {
       mode: 'ex2',
     };
   }
-  constructor() {
-    this.list = [];
-    this.update = this.update.bind(this);
-  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * JSON data を既存配列へ追加し
+   * id, link, message data へ変換します
+   * @param {Array<Object>} response JSON 戻り値
+   */
   updateList(response) {
     const list = this.list;
     let index = list.length;
+    // 既存配列へ変換後 object を追加します
     response.map((data) => {
       const id = `${data.id}-${index}`;
       const link = `/b/${id}`;
@@ -72,8 +115,14 @@ export default class ListReducersAsync {
       return data;
     });
   }
+  /**
+   * dispatch で呼び出されます
+   * @param {Object} [state={}] 状態情報
+   * @param {object} action 更新された state
+   * @returns {*} component で使用する props 変換された state
+   */
   update(state = {}, action) {
-    const clone = Object.assign({}, ListReducersAsync.defaultState);
+    const clone = Object.assign({}, this.defaultState);
     clone.type = action.type;
     // console.log('update this', this, state, action);
     switch (action.type) {
@@ -84,11 +133,11 @@ export default class ListReducersAsync {
         // clone.list = action.list.concat(clone.list);
         return clone;
       }
-      case ListReducersAsync.START: {
-        console.log(`ListReducersAsync.update ${action.type}`, state, action, clone);
-        clone.loading = 'loading';
-        return clone;
-      }
+      // case ListReducersAsync.START: {
+      //   console.log(`ListReducersAsync.update ${action.type}`, state, action, clone);
+      //   clone.loading = 'loading';
+      //   return clone;
+      // }
       case ListReducersAsync.COMPLETE: {
         console.log(`ListReducersAsync.update ${action.type}`, action);
         this.updateList(action.data.response);

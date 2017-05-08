@@ -19,48 +19,74 @@ import { connect } from 'react-redux';
 // component
 import { default as Button } from '../components/Button';
 
+// ex2
 import { default as ListActionsAsync } from './ListActionsAsync';
 
-// ------------------
-// async, done / fail
-const asyncDone = ({ dispatch }) => {
-  console.log('asyncDone', dispatch);
-  dispatch(ListActionsAsync.done(dispatch));
-};
-
-const asyncFail = ({ dispatch }) => {
-  console.log('asyncDone', dispatch);
-  dispatch(ListActionsAsync.fail(dispatch));
-};
-
-const done = connect()(asyncDone);
-const fail = connect()(asyncFail);
+// // ------------------
+// // async, done / fail
+// const asyncDone = ({ dispatch }) => {
+//   console.log('asyncDone', dispatch);
+//   dispatch(ListActionsAsync.done(dispatch));
+// };
+//
+// const asyncFail = ({ dispatch }) => {
+//   console.log('asyncDone', dispatch);
+//   dispatch(ListActionsAsync.fail(dispatch));
+// };
+//
+// const done = connect()(asyncDone);
+// const fail = connect()(asyncFail);
 
 // ------------------
 // button / click
+/**
+ * action instance
+ * @type {ListActionsAsync}
+ */
 const actionsAsync = new ListActionsAsync();
+/**
+ * {@link Button} component へ click handler を設定します
+ * @param {*} dispatch redact dispatch
+ * @returns {XML} {@link Button} component
+ */
 const containerButtonAsyncDispatch = ({ dispatch }) =>
   <Button
     maker={() => dispatch(actionsAsync.click(dispatch))}
   />;
 
+/**
+ * containerButtonAsyncDispatch.maker type を設定します
+ * @type {{dispatch: function}}
+ */
 containerButtonAsyncDispatch.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 // ---------------------------------
 // redux connect
+/**
+ * redux connect された {@link containerButtonAsyncDispatch}
+ * @type {*}
+ */
 const ContainerButton = connect()(containerButtonAsyncDispatch);
 // const done = connect()(asyncDone);
 // const fail = connect()(asyncFail);
 // console.log('', done, fail);
 
 // ---------------------------------
+/**
+ * button component
+ * @type {{ContainerButton: function}}
+ */
 const ContainerButtonAsync = {
   ContainerButton,
-  done,
-  fail,
+  // done,
+  // fail,
 };
 
+/**
+ * button component
+ * @type {{ContainerButton: function}}
+ */
 export default ContainerButtonAsync;
 // export default click;
