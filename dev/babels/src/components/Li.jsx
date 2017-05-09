@@ -53,9 +53,9 @@ export default class Li extends React.Component {
     return needUpdate;
     // return true;
   }
-  componentWillUnmount() {
-    console.log(`Li.componentWillUnmount, ${this.props.index}`);
-  }
+  // componentWillUnmount() {
+  //   console.log(`Li.componentWillUnmount, ${this.props.index}`);
+  // }
   /**
    * li.list-li を作成します
    * ```

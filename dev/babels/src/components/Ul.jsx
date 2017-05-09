@@ -12,6 +12,7 @@
  */
 
 import { default as React } from 'react';
+
 // @see https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html
 import { default as PropTypes } from 'prop-types';
 
@@ -31,7 +32,7 @@ export default class Ul extends React.Component {
    *      link: PropTypes.string.isRequired,
    *      message: PropTypes.string.isRequired,
    *    })).isRequired
-   * @returns {{id: string, mode: string, list: Object}} default props
+   * @returns {{id: string, mode: string, list: Object, loading: string}} default props
    */
   static get propTypes() {
     return {
@@ -42,22 +43,32 @@ export default class Ul extends React.Component {
         link: PropTypes.string,
         message: PropTypes.string,
       })).isRequired,
+      loading: PropTypes.string,
     };
   }
   /**
-   * display name set to 'Ul'
-   * @param {Object} props {id, mode, list}
+   * default props.loading - empty
+   * @returns {{loading: string}} default props.loading
    */
-  constructor(props) {
-    super(props);
-    console.log('Ul.constructor props', props);
-    if (!props.list) {
-      throw new Error(`Ul.props.list not found ${props.list}`);
-    }
-    // react/prefer-stateless-function
-    // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
-    this.displayName = 'Ul';
+  static get defaultProps() {
+    return {
+      loading: '',
+    };
   }
+  // /**
+  //  * display name set to 'Ul'
+  //  * @param {Object} props {id, mode, list}
+  //  */
+  // constructor(props) {
+  //   super(props);
+  //   console.log('Ul.constructor props', props);
+  //   if (!props.list) {
+  //     throw new Error(`Ul.props.list not found ${props.list}`);
+  //   }
+  //   // react/prefer-stateless-function
+  //   // @see https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
+  //   this.displayName = 'Ul';
+  // }
   /**
    * ul.mode-${this.props.mode} を作成します返します,
    * props.list length 0 は `null` を返します
@@ -71,7 +82,7 @@ export default class Ul extends React.Component {
       return <span className="empty-sapn">&nbsp;</span>;
     }
     return (
-      <ul id={`test-code-${this.props.id}`} className={`mode-${this.props.mode}`}>
+      <ul id={`test-code-${this.props.id}`} className={`mode-${this.props.mode} ${this.props.loading}`}>
         {
           list.map((data, index) => {
             const key = `component-li-${data.id}`;

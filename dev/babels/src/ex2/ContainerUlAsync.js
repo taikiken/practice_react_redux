@@ -23,7 +23,7 @@ import { default as Ul } from '../components/Ul';
  * @returns {*} 引数 state を返します
  */
 const mapStateToProps = (state) => {
-  console.log('mapStateToProps state', state);
+  console.log('UL mapStateToProps state', state);
   return state;
 };
 

@@ -37,6 +37,17 @@ if (!window.Promise) {
   window.Promise = Promise;
 }
 
+/**
+ * global object
+ * @type {{
+ *  React: React,
+ *  ReactDOM: ReactDOM,
+ *  Ul: *,
+ *  Button: *,
+ *  CreateUlApp: *,
+ *  CreateUlAppAsync: *
+ * }}
+ */
 const PRACTICE_REACT = {
   React,
   ReactDOM,

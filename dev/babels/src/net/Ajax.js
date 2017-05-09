@@ -11,9 +11,20 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
-  // built-in function
-  // Safari, IE はサポートしていないのでライブラリを使用すること
+
+// built-in function
+// Safari, IE はサポートしていないのでライブラリを使用すること
+/**
+ * fetch async request
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+ * @type {Fetch}
+ */
 const fetch = self.fetch;
+/**
+ * fetch request instance を作成します
+ * @see https://developer.mozilla.org/ja/docs/Web/API/Request
+ * @type {Request}
+ */
 const Request = self.Request;
 
 /**

@@ -83,7 +83,7 @@ export default class ListReducersAsync {
   get defaultState() {
     return {
       list: this.list,
-      loading: 'loading',
+      loading: '',
       error: '',
       type: '',
       id: 'redux-ul-ex2',

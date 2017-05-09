@@ -24,6 +24,16 @@ export default class Button extends React.Component {
   static get propTypes() {
     return {
       maker: PropTypes.func.isRequired,
+      loading: PropTypes.string,
+    };
+  }
+  /**
+   * default props.loading - empty
+   * @returns {{loading: string}} react default props.loading を設定します
+   */
+  static get defaultProps() {
+    return {
+      loading: '',
     };
   }
   /**
@@ -32,8 +42,29 @@ export default class Button extends React.Component {
    */
   constructor(props) {
     super(props);
+    console.log('Button.constructor', props);
+    /**
+     * bound this.onClick
+     * @type {function}
+     */
     this.onClick = this.onClick.bind(this);
   }
+  /**
+   * delegate - render するかを判断します, props.loading が違っていたら render します
+   * @override
+   * @param {?Object} nextProps 更新される props
+   * @param {?Object} nextState 更新される state
+   * @returns {boolean} true: will be render
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    const { loading } = this.props;
+    const needUpdate = nextProps.loading !== loading;
+    console.log('Button.shouldComponentUpdate', needUpdate, loading, nextProps, nextState);
+    return needUpdate;
+  }
+  // componentWillUnmount() {
+  //   console.log('Button.componentWillUnmount');
+  // }
   /**
    * input.onclick event handler
    * @param {Event} event input.onclick Event object
@@ -48,12 +79,15 @@ export default class Button extends React.Component {
    * @returns {XML} input type: button
    */
   render() {
+    console.log('Button.render style', this.props.loading);
     return (
-      <input
-        type="button"
-        onClick={this.onClick}
-        value="CLICK ME!"
-      />
+      <div className={`input-container ${this.props.loading}`}>
+        <input
+          type="button"
+          onClick={this.onClick}
+          value="CLICK ME!"
+        />
+      </div>
     );
   }
 }

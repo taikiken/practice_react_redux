@@ -33,7 +33,10 @@ import { default as ContainerButton } from './ContainerButton';
 //   applyMiddleware(thunk)
 // );
 
-
+/**
+ * redux createStore で {@link ListTypes.update} します
+ * @type {Store<S>}
+ */
 const storedUpdate = createStore(ListTypes.update);
 // console.log('storedUpdate', storedUpdate);
 

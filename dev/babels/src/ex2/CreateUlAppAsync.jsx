@@ -21,6 +21,7 @@ import { Provider } from 'react-redux';
 // types
 import { default as ListReducersAsync } from './ListReducersAsync';
 
+// connect container
 import { default as ContainerUlAsync } from './ContainerUlAsync';
 import { default as ContainerButtonAsync } from './ContainerButtonAsync';
 
@@ -36,7 +37,7 @@ const reducer = new ListReducersAsync();
 const storedUpdate = createStore(reducer.update);
 
 /**
- * {@link ContainerUlAsync}, {@link ContainerButtonAsync}.ContainerButton を出力します
+ * {@link ContainerUlAsync}, {@link ContainerButtonAsync} を出力します
  * - Provider
  *  - ContainerUlAsync
  * - Provider
@@ -44,7 +45,7 @@ const storedUpdate = createStore(reducer.update);
  */
 export default class CreateUlAppAsync {
   /**
-   * {@link ContainerUlAsync}, {@link ContainerButtonAsync}.ContainerButton を作成します
+   * {@link ContainerUlAsync}, {@link ContainerButtonAsync} を作成します
    * @param {Element} element {@link Ul} parent node
    * @param {Element} buttonElement {@link Button} parent node
    */
@@ -58,7 +59,7 @@ export default class CreateUlAppAsync {
     // button
     ReactDOM.render(
       <Provider store={storedUpdate}>
-        <ContainerButtonAsync.ContainerButton />
+        <ContainerButtonAsync />
       </Provider>,
       buttonElement
     );
