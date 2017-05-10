@@ -129,12 +129,13 @@ export default class Ajax {
    * <p>START, COMPLETE, ERROR イベントを発生させます</p>
    *
    * @param {string} path Ajax request path
+   * @param {?function} dispatch redux dispatch reducer
    * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
    * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
    * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
    * @return {boolean|Promise} ajax request を開始したかどうかの真偽値を返します
    */
-  start(path, method = 'GET', headers = null, formData = null) {
+  start(path, dispatch = null, method = 'GET', headers = null, formData = null) {
     // ajax request 開始
     if (!this.can) {
       // flag が off なので処理しない
@@ -171,17 +172,18 @@ export default class Ajax {
     //     // flag true
     //     this.enable();
     //   });
-    return this.fetch(request);
+    return this.fetch(request, dispatch);
     //
     // return true;
   }
   /**
    * fetch を使用し Ajax request を開始します
    * @param {Request} request fetch で使用する Request instance
+   * @param {?function} dispatch redux dispatch reducer
    * @returns {Promise} fetch Promise - pending を返します
    * `{[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}`
    */
-  fetch(request) {
+  fetch(request, dispatch) {
     // fetch start
     return fetch(request)
     // @param {Object} response - Ajax response
@@ -195,14 +197,22 @@ export default class Ajax {
       // @param {Object} - JSON パース済み Object
       .then((json) => {
         // complete event fire
-        this.resolve(json);
+        if (dispatch) {
+          dispatch(this.resolve({ type: 'done', data: json, dispatch }));
+        } else {
+          this.resolve(json);
+        }
         // flag true
         this.enable();
       })
       // @param {Error} - Ajax something error
       .catch((error) => {
         // error event fire
-        this.reject(error);
+        if (dispatch) {
+          dispatch(this.reject({ type: 'error', error, dispatch }));
+        } else {
+          this.reject(error);
+        }
         // flag true
         this.enable();
       });

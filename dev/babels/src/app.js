@@ -32,6 +32,9 @@ import { default as CreateUlApp } from './ex1/CreateUlApp';
 // ex2
 import { default as CreateUlAppAsync } from './ex2/CreateUlAppAsync';
 
+// ex3
+import { default as CreateAppAsync } from './ex3/CreateAppAsync';
+
 // To add to window
 if (!window.Promise) {
   window.Promise = Promise;
@@ -46,6 +49,7 @@ if (!window.Promise) {
  *  Button: *,
  *  CreateUlApp: *,
  *  CreateUlAppAsync: *
+ *  CreateAppAsync: *
  * }}
  */
 const PRACTICE_REACT = {
@@ -55,6 +59,7 @@ const PRACTICE_REACT = {
   Button,
   CreateUlApp,
   CreateUlAppAsync,
+  CreateAppAsync,
 };
 
 self.PRACTICE_REACT = PRACTICE_REACT;

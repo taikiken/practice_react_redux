@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/05/09 - 14:56
+ * @date 2017/05/10 - 17:24
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -9,3 +9,15 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+export default class ReducerTypes {
+  static get AJAX_START() {
+    return 'ajaxStart';
+  }
+  static get AJAX_COMPLETE() {
+    return 'ajaxComplete';
+  }
+  static get AJAX_ERROR() {
+    return 'ajaxError';
+  }
+}

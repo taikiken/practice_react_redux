@@ -9,3 +9,32 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+import { default as ReducerTypes } from './ReducerTypes';
+
+const buttonState = {
+  loading: '',
+  error: '',
+  type: '',
+  id: 'redux-ul-ex3',
+  mode: 'ex3',
+};
+
+const buttonReducer = (state = buttonState, action) => {
+  console.log('buttonReducer', state, action);
+  switch (action.type) {
+    case ReducerTypes.AJAX_START: {
+      const assignState = Object.assign({}, buttonState);
+      assignState.loading = 'loading';
+      return assignState;
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+export default {
+  buttonState,
+  buttonReducer,
+};
