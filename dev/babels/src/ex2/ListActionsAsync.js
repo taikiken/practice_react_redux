@@ -73,6 +73,7 @@ export default class ListActionsAsync {
    */
   click(dispatch) {
     this.dispatch = dispatch;
+    console.log('ListActionsAsync.click dispatch', dispatch);
     this.request.start();
     return {
       type: ListReducersAsync.CLICK,

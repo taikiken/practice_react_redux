@@ -17,13 +17,17 @@
 /**
  * fetch async request
  * @see https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
- * @type {Fetch}
+ * @type {Fetch|function}
+ * @private
+ * @static
  */
 const fetch = self.fetch;
 /**
  * fetch request instance を作成します
  * @see https://developer.mozilla.org/ja/docs/Web/API/Request
  * @type {Request}
+ * @private
+ * @static
  */
 const Request = self.Request;
 
@@ -49,99 +53,6 @@ const Request = self.Request;
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
  */
 export default class Ajax {
-  /**
-   * request 可能 / 不可能 flag を true に設定します
-   * @param {Function} resolve Promise success callback
-   * @param {Function} reject Promise fail callback
-   */
-  constructor(resolve, reject) {
-    /**
-     * request 可能 / 不可能 flag, true: 実行可能
-     * @type {boolean}
-     */
-    this.can = true;
-    /**
-     * Promise success callback
-     * @type {Function}
-     */
-    this.resolve = resolve;
-    /**
-     * Promise fail callback
-     * @type {Function}
-     */
-    this.reject = reject;
-  }
-  // ----------------------------------------
-  // METHOD
-  // ----------------------------------------
-  /**
-   * <p>Ajax request 開始します</p>
-   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
-   * true の時は false にしリクエストを開始します</p>
-   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
-   *
-   * @param {string} path Ajax request path
-   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
-   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
-   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
-   * @return {boolean} ajax request を開始したかどうかの真偽値を返します
-   */
-  start(path, method = 'GET', headers = null, formData = null) {
-    // ajax request 開始
-    if (!this.can) {
-      // flag が off なので処理しない
-      return false;
-    }
-
-    // flag off
-    this.disable();
-
-    // @type {Request} Request instance
-    const request = Ajax.option(path, method, headers, formData);
-
-    // fetch start
-    fetch(request)
-    // @param {Object} response - Ajax response
-      .then((response) => {
-        // may be success
-        if (response.status !== 200) {
-          throw new Error(`Ajax status error: (${response.status})`);
-        }
-        return response.json();
-      })
-      // @param {Object} - JSON パース済み Object
-      .then((json) => {
-        // complete event fire
-        this.resolve(json);
-        // flag true
-        this.enable();
-      })
-      // @param {Error} - Ajax something error
-      .catch((error) => {
-        // error event fire
-        this.reject(error);
-        // flag true
-        this.enable();
-      });
-
-    return true;
-  }
-  /**
-   * 実行可否 flag を true にします
-   * @returns {boolean} 現在の this.can property を返します
-   */
-  enable() {
-    this.can = true;
-    return this.can;
-  }
-  /**
-   * 実行可否 flag を false にします
-   * @returns {boolean} 現在の this.can property を返します
-   */
-  disable() {
-    this.can = false;
-    return this.can;
-  }
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -182,5 +93,134 @@ export default class Ajax {
     }
     // https://developer.mozilla.org/ja/docs/Web/API/Request
     return new Request(path, option);
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * request 可能 / 不可能 flag を true に設定します
+   * @param {Function} resolve Promise success callback
+   * @param {Function} reject Promise fail callback
+   */
+  constructor(resolve, reject) {
+    /**
+     * request 可能 / 不可能 flag, true: 実行可能
+     * @type {boolean}
+     */
+    this.can = true;
+    /**
+     * Promise success callback
+     * @type {Function}
+     */
+    this.resolve = resolve;
+    /**
+     * Promise fail callback
+     * @type {Function}
+     */
+    this.reject = reject;
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * <p>Ajax request 開始します</p>
+   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
+   * true の時は false にしリクエストを開始します</p>
+   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
+   *
+   * @param {string} path Ajax request path
+   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
+   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
+   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
+   * @return {boolean|Promise} ajax request を開始したかどうかの真偽値を返します
+   */
+  start(path, method = 'GET', headers = null, formData = null) {
+    // ajax request 開始
+    if (!this.can) {
+      // flag が off なので処理しない
+      return false;
+    }
+
+    // flag off
+    this.disable();
+
+    // @type {Request} Request instance
+    const request = Ajax.option(path, method, headers, formData);
+
+    // fetch start
+    // fetch(request)
+    // // @param {Object} response - Ajax response
+    //   .then((response) => {
+    //     // may be success
+    //     if (response.status !== 200) {
+    //       throw new Error(`Ajax status error: (${response.status})`);
+    //     }
+    //     return response.json();
+    //   })
+    //   // @param {Object} - JSON パース済み Object
+    //   .then((json) => {
+    //     // complete event fire
+    //     this.resolve(json);
+    //     // flag true
+    //     this.enable();
+    //   })
+    //   // @param {Error} - Ajax something error
+    //   .catch((error) => {
+    //     // error event fire
+    //     this.reject(error);
+    //     // flag true
+    //     this.enable();
+    //   });
+    return this.fetch(request);
+    //
+    // return true;
+  }
+  /**
+   * fetch を使用し Ajax request を開始します
+   * @param {Request} request fetch で使用する Request instance
+   * @returns {Promise} fetch Promise - pending を返します
+   * `{[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}`
+   */
+  fetch(request) {
+    // fetch start
+    return fetch(request)
+    // @param {Object} response - Ajax response
+      .then((response) => {
+        // may be success
+        if (response.status !== 200) {
+          throw new Error(`Ajax status error: (${response.status})`);
+        }
+        return response.json();
+      })
+      // @param {Object} - JSON パース済み Object
+      .then((json) => {
+        // complete event fire
+        this.resolve(json);
+        // flag true
+        this.enable();
+      })
+      // @param {Error} - Ajax something error
+      .catch((error) => {
+        // error event fire
+        this.reject(error);
+        // flag true
+        this.enable();
+      });
+  }
+  /**
+   * 実行可否 flag を true にします
+   * @returns {boolean} 現在の this.can property を返します
+   */
+  enable() {
+    this.can = true;
+    return this.can;
+  }
+  /**
+   * 実行可否 flag を false にします
+   * @returns {boolean} 現在の this.can property を返します
+   */
+  disable() {
+    this.can = false;
+    return this.can;
   }
 }

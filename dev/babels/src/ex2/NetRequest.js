@@ -20,10 +20,11 @@ export default class NetRequest {
   /**
    * {@link Ajax} instance を作成します
    * @param {string} path request path
-   * @param {function} [resolve=this.done] success callback
-   * @param {function} [reject=this.fail] error callback
+   * @param {function} resolve success callback
+   * @param {function} reject error callback
    */
-  constructor(path, resolve = this.done.bind(this), reject = this.fail.bind(this)) {
+  // constructor(path, resolve = this.done.bind(this), reject = this.fail.bind(this)) {
+  constructor(path, resolve, reject) {
     /**
      * request path
      * @type {string}
@@ -41,18 +42,18 @@ export default class NetRequest {
   start() {
     this.ajax.start(this.path);
   }
-  /**
-   * Ajax success callback
-   * @param {Object} data JSON data
-   */
-  done(data) {
-    console.warn('NetRequest.done', data, this);
-  }
-  /**
-   * Ajax error callback
-   * @param {Error} error ajax error
-   */
-  fail(error) {
-    console.warn('NetRequest.fail', error, this);
-  }
+  // /**
+  //  * Ajax success callback
+  //  * @param {Object} data JSON data
+  //  */
+  // done(data) {
+  //   console.warn('NetRequest.done', data, this);
+  // }
+  // /**
+  //  * Ajax error callback
+  //  * @param {Error} error ajax error
+  //  */
+  // fail(error) {
+  //   console.warn('NetRequest.fail', error, this);
+  // }
 }

@@ -123,11 +123,12 @@ export default class ListReducersAsync {
    */
   update(state = {}, action) {
     const clone = Object.assign({}, this.defaultState);
+    Object.assign(clone, state);
     clone.type = action.type;
     // console.log('update this', this, state, action);
     switch (action.type) {
       case ListReducersAsync.CLICK: {
-        console.log(`ListReducersAsync.update ${action.type}`, action, clone, this);
+        console.log(`ListReducersAsync.update ${action.type}`, action, clone);
         clone.loading = 'loading';
         // const cloneButton = clone;
         // clone.list = action.list.concat(clone.list);
