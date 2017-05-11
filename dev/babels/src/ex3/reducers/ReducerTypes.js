@@ -10,13 +10,35 @@
  *
  */
 
+/**
+ * redux - reducer type を定義します
+ */
 export default class ReducerTypes {
+  /**
+   * redux - reducer type: BUTTON_CLICK
+   * @returns {string} buttonClick
+   */
+  static get BUTTON_CLICK() {
+    return 'buttonClick';
+  }
+  /**
+   * redux - reducer type: AJAX_START
+   * @returns {string} ajaxStart
+   */
   static get AJAX_START() {
     return 'ajaxStart';
   }
+  /**
+   * redux - reducer type: AJAX_COMPLETE
+   * @returns {string} ajaxComplete
+   */
   static get AJAX_COMPLETE() {
     return 'ajaxComplete';
   }
+  /**
+   * redux - reducer type: AJAX_ERROR
+   * @returns {string} ajaxError
+   */
   static get AJAX_ERROR() {
     return 'ajaxError';
   }

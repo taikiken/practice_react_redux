@@ -12,19 +12,34 @@
 
 import { applyMiddleware, createStore } from 'redux';
 
-// middleware
+// reducers
 import reducers from '../reducers';
 
+// middleware
 import middleware from './middleware';
 
-console.log('reducers', reducers);
-
+/**
+ * redux - createStore します
+ * - {@link reducers}
+ * - middleware
+ *  - thunk
+ *  - logger
+ * @type {Store<S>}
+ */
 const store = createStore(
   reducers,
   applyMiddleware(
+    middleware.thunk,
     middleware.logger,
-    middleware.thunk
   )
 );
-console.log('store', store);
+
+/**
+ * redux - createStore します
+ * - reducers
+ * - middleware
+ *  - thunk
+ *  - logger
+ * @type {Store<S>}
+ */
 export default store;

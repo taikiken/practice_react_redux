@@ -1,16 +1,14 @@
 /**
- * @license inazumatv.com
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/05/04
- *
- * Copyright (c) 2011-2015 inazumatv.com, inc.
+ * @date 2017/05/11 - 15:34
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
+ *
  */
-
 
 // built-in function
 // Safari, IE はサポートしていないのでライブラリを使用すること
@@ -32,16 +30,20 @@ const fetch = self.fetch;
 const Request = self.Request;
 
 /**
- * <p>fetch API を使用し Ajax request を行います</p>
+ * <p>fetch API を使用し Ajax request を行い `redux-thunk` friendly します</p>
  * <p>Safari, IE はサポートしていないので polyfill ライブラリを使用します<br>
  * また、 fetch は Promise も必要としています。</p>
  *
  * ```
- * $ bower install fetch
- *
- * $ bower install es6-promise
+ * $ bower install whatwg-fetch
+ * $ bower install promise-polyfill
  * ```
  *
+ * yarn or npm
+ * ```
+ * yarn install whatwg-fetch
+ * yarn install promise-polyfill
+ * ```
  * @see http://caniuse.com/#feat=fetch
  * @see https://github.com/github/fetch
  * @see https://github.com/taylorhakes/promise-polyfill
@@ -51,8 +53,11 @@ const Request = self.Request;
  * @see https://developer.mozilla.org/ja/docs/Web/API/Request/Request
  * @see https://developer.mozilla.org/ja/docs/Web/API/Headers
  * @see https://developer.mozilla.org/ja/docs/Web/API/Body
+ *
+ * @see http://redux.js.org/docs/advanced/AsyncActions.html
+ * @see https://github.com/gaearon/redux-thunk
  */
-export default class Ajax {
+export default class AjaxThunk {
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -98,100 +103,19 @@ export default class Ajax {
   // CONSTRUCTOR
   // ----------------------------------------
   /**
-   * request 可能 / 不可能 flag を true に設定します
-   * @param {Function} resolve Promise success callback
-   * @param {Function} reject Promise fail callback
+   * request 可能フラッグを `ON` 設定します
    */
-  constructor(resolve, reject) {
+  constructor() {
     /**
      * request 可能 / 不可能 flag, true: 実行可能
      * @type {boolean}
+     * @default true
      */
     this.can = true;
-    /**
-     * Promise success callback
-     * @type {Function}
-     */
-    this.resolve = resolve;
-    /**
-     * Promise fail callback
-     * @type {Function}
-     */
-    this.reject = reject;
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
-  /**
-   * <p>Ajax request 開始します</p>
-   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
-   * true の時は false にしリクエストを開始します</p>
-   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
-   *
-   * @param {string} path Ajax request path
-   * @param {?function} dispatch redux dispatch reducer
-   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
-   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
-   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
-   * @return {boolean|Promise} ajax request を開始したかどうかの真偽値を返します
-   */
-  start(path, dispatch = null, method = 'GET', headers = null, formData = null) {
-    // ajax request 開始
-    if (!this.can) {
-      // flag が off なので処理しない
-      return false;
-    }
-
-    // flag off
-    this.disable();
-
-    // @type {Request} Request instance
-    const request = Ajax.option(path, method, headers, formData);
-
-    // fetch start
-    return this.fetch(request, dispatch);
-  }
-  /**
-   * fetch を使用し Ajax request を開始します
-   * @param {Request} request fetch で使用する Request instance
-   * @param {?function} dispatch redux dispatch reducer
-   * @returns {Promise} fetch Promise - pending を返します
-   * `{[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}`
-   */
-  fetch(request, dispatch) {
-    // fetch start
-    return fetch(request)
-    // @param {Object} response - Ajax response
-      .then((response) => {
-        // may be success
-        if (response.status !== 200) {
-          throw new Error(`Ajax status error: (${response.status})`);
-        }
-        return response.json();
-      })
-      // @param {Object} - JSON パース済み Object
-      .then((json) => {
-        // complete event fire
-        if (dispatch) {
-          dispatch(this.resolve({ type: 'done', data: json, dispatch }));
-        } else {
-          this.resolve(json);
-        }
-        // flag true
-        this.enable();
-      })
-      // @param {Error} - Ajax something error
-      .catch((error) => {
-        // error event fire
-        if (dispatch) {
-          dispatch(this.reject({ type: 'error', error, dispatch }));
-        } else {
-          this.reject(error);
-        }
-        // flag true
-        this.enable();
-      });
-  }
   /**
    * 実行可否 flag を true にします
    * @returns {boolean} 現在の this.can property を返します
@@ -207,5 +131,34 @@ export default class Ajax {
   disable() {
     this.can = false;
     return this.can;
+  }
+  /**
+   * <p>Ajax request 開始します</p>
+   * <p>request 可能 / 不可能 flag が false の時は実行しません<br>
+   * true の時は false にしリクエストを開始します</p>
+   * <p>START, COMPLETE, ERROR イベントを発生させます</p>
+   *
+   * @param {string} path Ajax request path
+   * @param {string} [method=GET] GET, POST, PUT, DELETE...etc request method
+   * @param {?Headers} [headers=null] Headers option, token などを埋め込むのに使用します
+   * @param {?FormData} [formData=null] フォームデータを送信するのに使用します
+   * @return {Promise} ajax request を開始し fetch Promise 返します
+   */
+  start(path, method = 'GET', headers = null, formData = null) {
+    if (!this.can) {
+      throw new Error(`Ajax request busy: ${this.can}`);
+    }
+    this.disable();
+    // @type {Request} Request instance
+    const request = AjaxThunk.option(path, method, headers, formData);
+    return fetch(request)
+      .then((response) => {
+        // may be success
+        this.enable();
+        if (response.status !== 200) {
+          throw new Error(`Ajax status error: (${response.status})`);
+        }
+        return response.json();
+      });
   }
 }

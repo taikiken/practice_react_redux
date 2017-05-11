@@ -10,13 +10,15 @@
  *
  */
 
-import { default as buttonAction } from './button';
-import { default as requestAction } from './request';
+import { default as buttonAction } from './child/button';
+import { default as requestAction } from './child/request';
 
-// const actionsAll = {
-//   buttonAction,
-// };
-
+/**
+ * redux - actions をまとめます
+ * - {@link buttonAction} - `./child/button`
+ * - {@link requestAction} - `./child/request`
+ * @type {*}
+ */
 export default {
   buttonAction,
   requestAction,

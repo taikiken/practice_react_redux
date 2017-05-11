@@ -24,7 +24,21 @@ import store from './store/';
 import ContainerButton from './container/ContainerButton';
 import ContainerUl from './container/ContainerUl';
 
+// ----------------------------------------
+
+/**
+ * redux を使用しコンテナを作成します - {@link store}
+ * - {@link Provider}
+ *  - {@link ContainerUl}
+ * - {@link Provider}
+ *  - {@link ContainerButton}
+ */
 export default class CreateAppAsync {
+  /**
+   * コンテナを作成します
+   * @param {Element} element div#js-container
+   * @param {Element} buttonElement div#js-button-container
+   */
   static make(element, buttonElement) {
     ReactDOM.render(
       <Provider store={store}>

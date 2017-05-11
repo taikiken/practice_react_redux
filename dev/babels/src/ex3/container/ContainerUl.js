@@ -21,10 +21,11 @@ import { default as Ul } from '../../components/Ul';
  * @param {*} request 更新される state {button, request}
  * @returns {*} 引数 state を返します
  */
-const mapStateToProps = ({ request }) => {
-  console.log('UL mapStateToProps state', request);
-  return request;
-};
+const mapStateToProps = ({ request }) => (request);
+// const mapStateToProps = ({ request }) => {
+//   console.log('UL mapStateToProps state', request);
+//   return request;
+// };
 
 /**
  * redux connect を {@link mapStateToProps} と {@link Ul} します

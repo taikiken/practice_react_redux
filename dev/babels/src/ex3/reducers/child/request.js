@@ -10,8 +10,22 @@
  *
  */
 
-import { default as ReducerTypes } from './ReducerTypes';
+import { default as ReducerTypes } from '../ReducerTypes';
 
+/**
+ * request default state
+ * ```
+ * list: [],
+ * loading: '',
+ * error: '',
+ * type: 'INIT_XXX',
+ * id: 'redux-ul-ex3',
+ * mode: 'ex3',
+ * ```
+ * @type {{list: Array, loading: string, error: string, type: string, id: string, mode: string}}
+ * @private
+ * @static
+ */
 const initialState = {
   list: [],
   loading: '',
@@ -21,8 +35,19 @@ const initialState = {
   mode: 'ex3',
 };
 
+/**
+ * Ajax 取得データをストックします
+ * @type {Array}
+ * @private
+ * @static
+ */
 const record = [];
 
+/**
+ * Ajax 取得 JSON を加工します
+ * @param {Array<Object>} response JSON.response
+ * @returns {Array} 表示リストに使用します
+ */
 const update = (response) => {
   const list = record;
   let index = list.length;
@@ -42,10 +67,22 @@ const update = (response) => {
   return list;
 };
 
+/**
+ * ajax request {@link ReducerTypes} により state を変化させます
+ * @param {Object} [state=initialState] 状態
+ * @param {Object} action redux action Object
+ * @returns {*} state を返します
+ */
 const requestReducer = (state = initialState, action) => {
-  console.log('requestReducer', action.state, state, action);
+  console.log('requestReducer', action.type, state, action);
   const assignState = Object.assign({}, state);
   switch (action.type) {
+    case ReducerTypes.BUTTON_CLICK: {
+      assignState.loading = 'loading';
+      const previous = action.list || [];
+      assignState.list = previous.concat(state.list);
+      return assignState;
+    }
     case ReducerTypes.AJAX_START: {
       assignState.loading = 'loading';
       const previous = action.list || [];
@@ -71,7 +108,10 @@ const requestReducer = (state = initialState, action) => {
   }
 };
 
-export default {
-  initialState,
-  requestReducer,
-};
+/**
+ * ajax request {@link ReducerTypes} により state を変化させます
+ * @param {Object} [state=initialState] 状態
+ * @param {Object} action redux action Object
+ * @returns {*} state を返します
+ */
+export default requestReducer;

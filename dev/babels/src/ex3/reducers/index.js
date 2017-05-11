@@ -12,25 +12,24 @@
 
 import { combineReducers } from 'redux';
 
-import button from './button';
-import request from './request';
-//
-// // middleware
-// import middleware from './middleware';
+import button from './child/button';
+import request from './child/request';
 
-// console.log('buttonReducer', button.buttonReducer);
-// console.log('logger', middleware.logger);
+/**
+ * redux - combineReducers します
+ * - {@link button}
+ * - {@link request}
+ * @type {Reducer<S>}
+ */
+const reducers = combineReducers({
+  button,
+  request,
+});
 
-const reducers = combineReducers(
-  {
-    button: button.buttonReducer,
-    request: request.requestReducer,
-  }
-);
-
-// export default {
-//   middleware,
-//   all,
-// };
+/**
+ * redux - combineReducers します
+ * - {@link button}
+ * - {@link request}
+ * @type {Reducer<S>}
+ */
 export default reducers;
-
