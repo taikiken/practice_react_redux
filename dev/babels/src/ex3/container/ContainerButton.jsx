@@ -11,17 +11,17 @@
  */
 
 // react
-import { default as React } from 'react';
-import { default as PropTypes } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // redux
 import { connect } from 'react-redux';
 
 // component
-import { default as Button } from '../../components/Button';
+import Button from '../../components/Button';
 
 // actions
-import { default as actions } from '../actions';
+import actions from '../actions';
 
 // store
 // import store from '../store/';
@@ -40,6 +40,8 @@ const mapStateToProps = ({ button }) => (button);
 /**
  * {@link Button} component を作成し
  * onClick handler で実行する `redux actions` をキックする関数を props 定義します
+ * - dispatch - action method を実行する redux.dispatch
+ * - loading - ajax 処理中フラッグに使用する
  * @param {function} dispatch redux - dispatch
  * @param {string} [loading=''] loading | '', ajax request 中フラッグ
  * @returns {XML} Button component を返します

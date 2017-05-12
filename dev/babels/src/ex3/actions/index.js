@@ -10,8 +10,8 @@
  *
  */
 
-import { default as buttonAction } from './child/button';
-import { default as requestAction } from './child/request';
+import buttonAction from './assets/button';
+import requestAction from './assets/request';
 
 /**
  * redux - actions をまとめます

@@ -11,8 +11,8 @@
  */
 
 // react
-import { default as React } from 'react';
-import { default as ReactDOM } from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // redux
 import { Provider } from 'react-redux';

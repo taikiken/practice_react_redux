@@ -12,8 +12,8 @@
 
 import { combineReducers } from 'redux';
 
-import button from './child/button';
-import request from './child/request';
+import button from './assets/button';
+import request from './assets/request';
 
 /**
  * redux - combineReducers します

@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 
 // ------
-import { default as Ul } from '../../components/Ul';
+import Ul from '../../components/Ul';
 
 /**
  * state を redux 経由し props 変換します
