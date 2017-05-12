@@ -24,7 +24,7 @@ export default class ReducerTypes {
   /**
    * redux - reducer type: AJAX_START
    * @returns {string} ajaxStart
-   */s
+   */
   static get AJAX_START() {
     return 'ajaxStart';
   }
