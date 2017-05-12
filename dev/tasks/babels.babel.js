@@ -78,7 +78,7 @@ gulp.task('babels:babel', () => gulp.src(files)
       // 'es2016',
       'es2015',
       'react',
-      // 'stage-0',
+      'stage-0',
     ],
     plugins: ['transform-runtime'],
   }))
